@@ -1,4 +1,7 @@
 import React from "react";
+import Dashboard from "./component/Dashboard";
+import Display from "./component/Display";
+
 import "./App.css";
 
 class App extends React.Component {
@@ -56,12 +59,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Baseball App</h1>
-        <p>Balls: {this.state.balls}</p>
-        <p>Strikes: {this.state.strikes}</p>
-        <button onClick={this.addStrike}>STRIKE</button>{" "}
-        <button onClick={this.addBall}>BALL</button>{" "}
-        <button onClick={this.addFoul}>FOUL</button>{" "}
-        <button onClick={this.addHit}>HIT</button>{" "}
+        <Dashboard balls={this.state.balls} strikes={this.state.strikes} />
+        <Display
+          addStrike={this.addStrike}
+          addFoul={this.addFoul}
+          addHit={this.addHit}
+          addBall={this.addBall}
+        />
       </div>
     );
   }
