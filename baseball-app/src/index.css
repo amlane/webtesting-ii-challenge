@@ -7,6 +7,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+  border: 1px solid;
+  background: none;
+  padding: 3px 8px;
+}
+
 button:hover {
   cursor: pointer;
+}
+
+button:focus {
+  outline: none;
 }

@@ -4,9 +4,7 @@ import "./App.css";
 class App extends React.Component {
   state = {
     strikes: 0,
-    balls: 0,
-    foul: 0,
-    hit: 0
+    balls: 0
   };
 
   addStrike = e => {
@@ -22,15 +20,13 @@ class App extends React.Component {
 
   addBall = e => {
     e.preventDefault();
-    if (this.state.balls < 3) {
-      this.setState(prevState => ({
-        balls: ++prevState.balls
-      }));
-    } else {
-      this.setState({
-        balls: 0
-      });
-    }
+    this.state.balls < 3
+      ? this.setState(prevState => ({
+          balls: ++prevState.balls
+        }))
+      : this.setState({
+          balls: 0
+        });
   };
 
   addHit = e => {
@@ -62,10 +58,10 @@ class App extends React.Component {
         <h1>Baseball App</h1>
         <p>Balls: {this.state.balls}</p>
         <p>Strikes: {this.state.strikes}</p>
-        <button onClick={this.addStrike}>strike</button>{" "}
-        <button onClick={this.addBall}>ball</button>{" "}
-        <button onClick={this.addFoul}>foul</button>{" "}
-        <button onClick={this.addHit}>hit</button>{" "}
+        <button onClick={this.addStrike}>STRIKE</button>{" "}
+        <button onClick={this.addBall}>BALL</button>{" "}
+        <button onClick={this.addFoul}>FOUL</button>{" "}
+        <button onClick={this.addHit}>HIT</button>{" "}
       </div>
     );
   }
