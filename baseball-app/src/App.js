@@ -11,10 +11,40 @@ class App extends React.Component {
     outs: 0,
     runs: 0,
     inning: 0,
-    firstBase: "",
-    secondBase: "",
-    thirdBase: "",
-    homeBase: ""
+    players: [],
+    batter: "",
+    batterId: 0
+  };
+
+  componentDidMount = () => {
+    this.setState(
+      {
+        players: [
+          {
+            id: 1,
+            name: "Amanda"
+          },
+          {
+            id: 2,
+            name: "Taslim"
+          },
+          {
+            id: 3,
+            name: "Jonathan"
+          }
+        ]
+      },
+      () => this.setPlayer()
+    );
+  };
+
+  setPlayer = () => {
+    this.setState(
+      {
+        batter: this.state.players[this.state.batterId].name
+      },
+      () => console.log("player", this.state.batter)
+    );
   };
 
   addStrike = e => {
@@ -48,15 +78,30 @@ class App extends React.Component {
   };
 
   addOut = () => {
-    this.setState(prevState => ({
-      outs: prevState.strikes === 0 ? prevState.outs + 1 : this.state.outs
-    }));
+    this.setState(
+      prevState => ({
+        outs: prevState.strikes === 0 ? prevState.outs + 1 : this.state.outs,
+        batterId:
+          prevState.strikes === 0 ? prevState.batterId + 1 : this.state.batterId
+      }),
+      () => this.setPlayer()
+    );
   };
 
   render() {
     return (
       <div className="App">
         <h1>Baseball App</h1>
+        <span>
+          Team:{" "}
+          <span>
+            {this.state.players.map(p => {
+              return <li key={p.id}>{p.name}</li>;
+            })}
+          </span>
+        </span>
+
+        <p>Player At Bat: {this.state.batter}</p>
         <Dashboard
           balls={this.state.balls}
           strikes={this.state.strikes}
