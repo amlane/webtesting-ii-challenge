@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { render } from "@testing-library/react";
 import "@testing-library/react/cleanup-after-each";
 
-import App from "./App";
+import App from "../App";
 import { fireEvent } from "@testing-library/react/dist";
 
 describe("its an app", () => {
