@@ -11,7 +11,7 @@ class App extends React.Component {
     outs: 0,
     runs: 0,
     inning: 0,
-    players: [],
+    team1: [],
     batter: "",
     batterId: 0
   };
@@ -19,7 +19,7 @@ class App extends React.Component {
   componentDidMount = () => {
     this.setState(
       {
-        players: [
+        team1: [
           {
             id: 1,
             name: "Amanda"
@@ -31,6 +31,10 @@ class App extends React.Component {
           {
             id: 3,
             name: "Jonathan"
+          },
+          {
+            id: 4,
+            name: "Gina"
           }
         ]
       },
@@ -39,9 +43,10 @@ class App extends React.Component {
   };
 
   setPlayer = () => {
+    if (this.state.batterId > this.state.team1.length - 1) return;
     this.setState(
       {
-        batter: this.state.players[this.state.batterId].name
+        batter: this.state.team1[this.state.batterId].name
       },
       () => console.log("player", this.state.batter)
     );
@@ -82,7 +87,9 @@ class App extends React.Component {
       prevState => ({
         outs: prevState.strikes === 0 ? prevState.outs + 1 : this.state.outs,
         batterId:
-          prevState.strikes === 0 ? prevState.batterId + 1 : this.state.batterId
+          prevState.strikes === 0 && this.state.batterId !== 3
+            ? prevState.batterId + 1
+            : this.state.batterId
       }),
       () => this.setPlayer()
     );
@@ -93,9 +100,9 @@ class App extends React.Component {
       <div className="App">
         <h1>Baseball App</h1>
         <span>
-          Team:{" "}
+          Team 1:{" "}
           <span>
-            {this.state.players.map(p => {
+            {this.state.team1.map(p => {
               return <li key={p.id}>{p.name}</li>;
             })}
           </span>
