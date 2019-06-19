@@ -5,6 +5,7 @@ function Dashboard(props) {
     <>
       <p>Balls: {props.balls}</p>
       <p>Strikes: {props.strikes}</p>
+      <p>Outs: {props.outs}</p>
     </>
   );
 }
