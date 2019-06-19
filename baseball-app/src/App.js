@@ -8,7 +8,13 @@ class App extends React.Component {
   state = {
     strikes: 0,
     balls: 0,
-    outs: 0
+    outs: 0,
+    runs: 0,
+    inning: 0,
+    firstBase: "",
+    secondBase: "",
+    thirdBase: "",
+    homeBase: ""
   };
 
   addStrike = e => {
@@ -16,6 +22,7 @@ class App extends React.Component {
     this.setState(prevState => ({
       strikes: prevState.strikes < 2 ? ++prevState.strikes : 0
     }));
+    this.addOut();
   };
 
   addBall = e => {
@@ -35,15 +42,16 @@ class App extends React.Component {
 
   addFoul = e => {
     e.preventDefault();
-
-    if (this.state.strikes < 2) {
-      this.setState(prevState => ({
-        strikes: prevState.strikes < 2 ? ++prevState.strikes : this.state
-      }));
-    }
+    this.setState(prevState => ({
+      strikes: prevState.strikes < 2 ? ++prevState.strikes : this.state.strikes
+    }));
   };
 
-  addOut = () => {};
+  addOut = () => {
+    this.setState(prevState => ({
+      outs: prevState.strikes === 0 ? prevState.outs + 1 : this.state.outs
+    }));
+  };
 
   render() {
     return (

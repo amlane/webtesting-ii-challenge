@@ -78,4 +78,16 @@ describe("its an app", () => {
     fireEvent.click(button);
     getByText(/strikes: 2/i);
   });
+
+  it("should increment outs by 1 when a player strikes out", () => {
+    const { getByText } = render(<App />);
+    const button = getByText(/STRIKE/);
+
+    fireEvent.click(button);
+    getByText(/outs: 0/i);
+    fireEvent.click(button);
+    getByText(/outs: 0/i);
+    fireEvent.click(button);
+    getByText(/outs: 1/i);
+  });
 });
